@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: gramcast-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5440/gramcast
+    username: gramcast_user
+    password: ${GRAMCAST_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+
+gramcast:
+  frontend-url: http://localhost:5174
+  ai-service-url: http://localhost:8002
+  pilot:
+    state: Madhya Pradesh
+    district: Indore
+    block: Sanwer

@@ -1,0 +1,27 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# backend
+backend/target/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+
+# python
+ai-service/.venv/
+**/__pycache__/
+*.pyc
+
+# generated ML models
+ai-service/models/*.joblib
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store

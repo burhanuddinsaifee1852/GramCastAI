@@ -1,0 +1,32 @@
+services:
+
+  postgis:
+    image: postgis/postgis:16-3.5
+    container_name: gramcast-postgis
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ${GRAMCAST_DB}
+      POSTGRES_USER: ${GRAMCAST_DB_USER}
+      POSTGRES_PASSWORD: ${GRAMCAST_DB_PASSWORD}
+
+    ports:
+      - "${GRAMCAST_DB_PORT}:5432"
+
+    volumes:
+      - gramcast_postgis_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${GRAMCAST_DB_USER} -d ${GRAMCAST_DB}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+
+volumes:
+  gramcast_postgis_data:
